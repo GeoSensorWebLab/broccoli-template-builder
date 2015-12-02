@@ -66,7 +66,8 @@ BroccoliTemplateBuilder.prototype.transform = function (srcDir, destDir) {
     });
 
     walker.on('end', function () {
-      var data = files.join('');
+      var data = "if (window.JST === undefined) { window.JST = {}; }\n";
+      data = data + files.join('');
       fs.writeFile(path.join(destDir, options.outputFile), data, function (err) {
         if (err) reject(err);
         resolve(destDir);
